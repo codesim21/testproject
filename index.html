@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DINGOLAY 2026 - AFCA Afro-Caribbean Dancing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .poster {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            background: #6b7b6e;
+            overflow: hidden;
+        }
+
+        .poster::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(90deg, 
+                    rgba(100, 120, 110, 0.3) 0px,
+                    rgba(80, 95, 85, 0.2) 100px,
+                    rgba(90, 110, 95, 0.25) 200px),
+                linear-gradient(135deg, 
+                    rgba(70, 85, 75, 0.4) 0%,
+                    rgba(85, 100, 90, 0.3) 50%,
+                    rgba(75, 90, 80, 0.35) 100%);
+            filter: blur(25px);
+            opacity: 0.8;
+        }
+
+        .poster::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 150%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(120, 140, 125, 0.15) 0%, transparent 70%),
+                repeating-linear-gradient(45deg,
+                    transparent 0px,
+                    rgba(90, 110, 95, 0.1) 1px,
+                    transparent 2px,
+                    transparent 40px);
+            filter: blur(30px);
+            animation: subtleMove 20s infinite ease-in-out alternate;
+        }
+
+        @keyframes subtleMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 20px) rotate(1deg); }
+        }
+
+        .left-panel {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo-container {
+            margin-bottom: 3rem;
+        }
+
+        .afca-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dancer-silhouette {
+            width: 45px;
+            height: 80px;
+            background: black;
+            border-radius: 20px 20px 25px 25px;
+            position: relative;
+            clip-path: polygon(45% 0%, 55% 0%, 60% 15%, 70% 20%, 65% 25%, 50% 30%, 35% 25%, 30% 20%, 40% 15%, 45% 0%);
+        }
+
+        .dancer-silhouette::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 20%;
+            width: 60px;
+            height: 50px;
+            background: black;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            clip-path: ellipse(50% 40% at 50% 40%);
+            transform: rotate(-10deg);
+        }
+
+        .dancer-silhouette::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -5px;
+            width: 25px;
+            height: 60px;
+            background: black;
+            transform: rotate(-25deg);
+            border-radius: 15px;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        .rainbow-brush {
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(135deg, 
+                #FF6B6B 0%, 
+                #FF8C42 12%, 
+                #FFD93D 25%, 
+                #96CEB4 50%, 
+                #4ECDC4 65%, 
+                #45B7D1 80%, 
+                #9B59B6 100%);
+            border-radius: 40% 60% 50% 50% / 60% 40% 50% 50%;
+            opacity: 0.95;
+            z-index: -1;
+            filter: blur(1px);
+            transform: rotate(-15deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .afca {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.9rem;
+            text-transform: lowercase;
+            opacity: 0.95;
+        }
+
+        .event-title {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            line-height: 1;
+        }
+
+        .event-year {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .contact {
+            font-size: 1rem;
+        }
+
+        .contact-item {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .right-panel {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            overflow: hidden;
+        }
+
+        .carnival-figure {
+            width: 100%;
+            max-width: 500px;
+            height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feather-headpiece {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 300px;
+            background: 
+                radial-gradient(ellipse at 50% 30%, #FFD93D 0%, #FFA500 25%, #FF8C42 50%, #FF6B6B 75%, #FF4500 100%);
+            border-radius: 40% 40% 50% 50%;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            z-index: 3;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 60%, 90% 90%, 50% 100%, 10% 90%, 0% 60%);
+        }
+
+        .feather-headpiece::before,
+        .feather-headpiece::after {
+            content: '';
+            position: absolute;
+            background: radial-gradient(ellipse, #FFD93D 0%, #FFA500 40%, #FF6B6B 80%);
+            border-radius: 50%;
+        }
+
+        .feather-headpiece::before {
+            width: 140px;
+            height: 120px;
+            top: -40px;
+            left: 15%;
+            transform: rotate(-15deg);
+            clip-path: ellipse(50% 45% at 50% 45%);
+        }
+
+        .feather-headpiece::after {
+            width: 130px;
+            height: 110px;
+            top: -35px;
+            right: 15%;
+            transform: rotate(12deg);
+            clip-path: ellipse(50% 45% at 50% 45%);
+        }
+
+        .face {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            height: 210px;
+            background: linear-gradient(135deg, #5c4033 0%, #8B4513 50%, #654321 100%);
+            border-radius: 50% 50% 55% 45%;
+            z-index: 2;
+            box-shadow: 
+                inset -15px -25px 0 rgba(0, 0, 0, 0.3),
+                0 5px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .face-paint {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 140px;
+            height: 170px;
+            background: 
+                linear-gradient(135deg, 
+                    transparent 35%, 
+                    #FFD93D 35%, #FFD93D 42%, 
+                    transparent 42%, transparent 48%,
+                    #FFD93D 48%, #FFD93D 55%, 
+                    transparent 55%),
+                linear-gradient(45deg, 
+                    transparent 43%, 
+                    black 43%, black 47%, 
+                    transparent 47%),
+                linear-gradient(-45deg, 
+                    transparent 43%, 
+                    black 43%, black 47%, 
+                    transparent 47%);
+            border-radius: 50%;
+            opacity: 0.85;
+        }
+
+        .beard {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+            background: white;
+            border-radius: 50% 50% 0 0;
+            opacity: 0.8;
+        }
+
+        .costume {
+            position: absolute;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 380px;
+            background: white;
+            border-radius: 8px;
+            z-index: 1;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .costume::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Circles - red */
+                radial-gradient(circle, #FF6B6B 0%, #FF6B6B 40%, transparent 40%),
+                radial-gradient(circle, #FF6B6B 0%, #FF6B6B 36%, transparent 36%),
+                radial-gradient(circle, #FF6B6B 0%, #FF6B6B 43%, transparent 43%),
+                /* Circles - teal */
+                radial-gradient(circle, #4ECDC4 0%, #4ECDC4 38%, transparent 38%),
+                radial-gradient(circle, #4ECDC4 0%, #4ECDC4 41%, transparent 41%),
+                /* Circles - yellow */
+                radial-gradient(circle, #FFD93D 0%, #FFD93D 42%, transparent 42%),
+                radial-gradient(circle, #FFD93D 0%, #FFD93D 39%, transparent 39%),
+                radial-gradient(circle, #FFD93D 0%, #FFD93D 40%, transparent 40%),
+                /* Circles - green */
+                radial-gradient(circle, #96CEB4 0%, #96CEB4 35%, transparent 35%),
+                radial-gradient(circle, #96CEB4 0%, #96CEB4 37%, transparent 37%),
+                /* Circles - blue */
+                radial-gradient(circle, #45B7D1 0%, #45B7D1 40%, transparent 40%),
+                radial-gradient(circle, #45B7D1 0%, #45B7D1 38%, transparent 38%),
+                /* Circles - purple */
+                radial-gradient(circle, #9B59B6 0%, #9B59B6 45%, transparent 45%),
+                radial-gradient(circle, #9B59B6 0%, #9B59B6 44%, transparent 44%),
+                /* Squares */
+                linear-gradient(to right, #FF6B6B 0%, #FF6B6B 100%),
+                linear-gradient(to right, #4ECDC4 0%, #4ECDC4 100%),
+                linear-gradient(to right, #FFD93D 0%, #FFD93D 100%),
+                linear-gradient(to right, #96CEB4 0%, #96CEB4 100%),
+                linear-gradient(to right, #45B7D1 0%, #45B7D1 100%),
+                linear-gradient(to right, #9B59B6 0%, #9B59B6 100%),
+                /* Diamonds */
+                linear-gradient(135deg, transparent 45%, #FF6B6B 45%, #FF6B6B 55%, transparent 55%),
+                linear-gradient(135deg, transparent 44%, #4ECDC4 44%, #4ECDC4 56%, transparent 56%),
+                linear-gradient(135deg, transparent 46%, #FFD93D 46%, #FFD93D 54%, transparent 54%),
+                linear-gradient(135deg, transparent 45%, #96CEB4 45%, #96CEB4 55%, transparent 55%);
+            background-size: 
+                /* Circles - red */
+                28px 28px, 26px 26px, 30px 30px,
+                /* Circles - teal */
+                32px 32px, 27px 27px,
+                /* Circles - yellow */
+                29px 29px, 31px 31px, 28px 28px,
+                /* Circles - green */
+                30px 30px, 27px 27px,
+                /* Circles - blue */
+                34px 34px, 29px 29px,
+                /* Circles - purple */
+                35px 35px, 33px 33px,
+                /* Squares */
+                22px 22px, 26px 26px, 24px 24px, 28px 28px, 20px 20px, 30px 30px,
+                /* Diamonds */
+                32px 32px, 28px 28px, 30px 30px, 26px 26px;
+            background-position:
+                /* Circles - red */
+                15% 12%, 25% 28%, 12% 45%,
+                /* Circles - teal */
+                42% 8%, 38% 52%,
+                /* Circles - yellow */
+                68% 18%, 75% 38%, 78% 65%,
+                /* Circles - green */
+                82% 15%, 65% 48%,
+                /* Circles - blue */
+                58% 32%, 52% 58%,
+                /* Circles - purple */
+                45% 72%, 55% 82%,
+                /* Squares */
+                8% 25%, 48% 22%, 72% 28%, 18% 42%, 88% 35%, 55% 68%,
+                /* Diamonds */
+                32% 18%, 62% 42%, 38% 58%, 78% 52%;
+            background-repeat: no-repeat;
+        }
+
+        .staff {
+            position: absolute;
+            right: 20px;
+            top: 45%;
+            width: 10px;
+            height: 450px;
+            background: linear-gradient(to bottom, #F5E6D3 0%, #E8D5B7 30%, #D4AF37 50%, #E8D5B7 70%, #F5E6D3 100%);
+            border-radius: 5px;
+            transform: rotate(2deg);
+            box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
+            z-index: 4;
+        }
+
+        .staff::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse, #FFD93D 0%, #FFA500 50%, #FF8C42 100%);
+            border-radius: 50% 50% 40% 60%;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 80%, 0% 80%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .poster {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                padding: 2rem;
+            }
+
+            .event-title {
+                font-size: 3.5rem;
+            }
+
+            .event-year {
+                font-size: 3rem;
+            }
+
+            .right-panel {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .carnival-figure {
+                transform: scale(0.7);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-panel {
+                padding: 1.5rem;
+            }
+
+            .event-title {
+                font-size: 2.5rem;
+            }
+
+            .event-year {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .carnival-figure {
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="left-panel">
+            <div>
+                <div class="logo-container">
+                    <div class="afca-logo">
+                        <div style="position: relative;">
+                            <div class="rainbow-brush"></div>
+                            <div class="dancer-silhouette"></div>
+                        </div>
+                        <div class="logo-text">
+                            <span class="afca">AFCA</span>
+                            <span class="subtitle">afro-caribbean dancing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="event-title">DINGOLAY</h1>
+                <div class="event-year">2026</div>
+
+                <p class="tagline">Celebrate the spirit of Carnival!</p>
+
+                <p class="description">
+                    Join us for workshops exploring the roots of Afro-Caribbean traditions – discover the origins of traditional Carnival characters, their stories, energy, and vibrant personalities.
+                </p>
+
+                <p class="cta-text">
+                    Be part of our Afro-Caribbean Community Project – move, learn, and live the culture!
+                </p>
+            </div>
+
+            <div class="contact">
+                <div class="contact-item">
+                    <span class="contact-icon">✉</span>
+                    <span>Email: <a href="mailto:danceteachersuzie@gmail.com">danceteachersuzie@gmail.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>Website: <a href="http://www.afcamovements.co.uk" target="_blank">www.afcamovements.co.uk</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>Tel: <a href="tel:07507263547">07507 263547</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="carnival-figure">
+                <div class="staff"></div>
+                <div class="feather-headpiece"></div>
+                <div class="face">
+                    <div class="face-paint"></div>
+                    <div class="beard"></div>
+                </div>
+                <div class="costume"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
