@@ -241,21 +241,20 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// On Vercel, static files (HTML, CSS, JS, images, videos) are served automatically
-// We only need to handle API routes here
-// For local development, serve static files
-if (!process.env.VERCEL) {
-    const basePath = __dirname;
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(basePath, 'index.html'));
-    });
-    app.get('/dingolay.html', (req, res) => {
-        res.sendFile(path.join(basePath, 'dingolay.html'));
-    });
-    app.get('/register.html', (req, res) => {
-        res.sendFile(path.join(basePath, 'register.html'));
-    });
-}
+// Serve HTML pages (works on both Vercel and local)
+const basePath = process.env.VERCEL ? process.cwd() : __dirname;
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(basePath, 'index.html'));
+});
+
+app.get('/dingolay.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'dingolay.html'));
+});
+
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'register.html'));
+});
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
