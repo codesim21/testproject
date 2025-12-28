@@ -12,13 +12,12 @@ console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
 console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
 
 if (!process.env.STRIPE_SECRET_KEY) {
-    console.error('❌ ERROR: STRIPE_SECRET_KEY not found in .env file');
-    console.error('Please create a .env file in the project root with:');
-    console.error('STRIPE_SECRET_KEY=sk_test_your_key_here');
-    console.error('STRIPE_PUBLISHABLE_KEY=pk_test_your_key_here');
-    console.error('MONGODB_URI=your_mongodb_connection_string');
-    console.error('PORT=3000');
-    process.exit(1);
+    console.error('❌ ERROR: STRIPE_SECRET_KEY not found in environment variables');
+    console.error('Please set STRIPE_SECRET_KEY in Vercel environment variables');
+    // Don't exit in serverless environment - let it fail gracefully on API calls
+    if (require.main === module) {
+        process.exit(1);
+    }
 }
 
 if (!process.env.MONGODB_URI) {
@@ -54,8 +53,11 @@ async function connectToMongoDB() {
     }
 }
 
-// Initialize MongoDB connection
-connectToMongoDB();
+// Initialize MongoDB connection (don't block on serverless)
+connectToMongoDB().catch(err => {
+    console.error('MongoDB connection failed:', err);
+    // Continue without MongoDB
+});
 
 // Middleware
 app.use(cors());
@@ -219,6 +221,11 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString(),
         database: db ? 'MongoDB' : 'JSON file'
     });
+});
+
+// Serve index.html for root path (Vercel compatibility)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Graceful shutdown
