@@ -1,6 +1,6 @@
 // Stripe Payment Integration
 // IMPORTANT: Replace 'YOUR_STRIPE_PUBLISHABLE_KEY' with your actual Stripe publishable key
-const stripe = Stripe('pk_test_51Sj51v9zveQG0qXccXtEQ9R2r32XswujVtcJBfAv2mTqujwDQkgYymMwLcDmXLGkkQUVUmQOXBynB7lL3xFgVVsp00iB7ZjxrR');
+const stripe = Stripe('pk_live_51Sj51v9zveQG0qXct1BtgXLi2drwpCaCRCrRpPhavYoXzfKnmwNtDyvUGYu2YZtazxmTEN1bdYA7ompsvPQA10h100oul989l0');
 const elements = stripe.elements();
 
 // Create card element
