@@ -62,7 +62,17 @@ connectToMongoDB().catch(err => {
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // Serve static files
+// Serve static files with correct MIME types
+app.use(express.static('.', {
+    setHeaders: (res, filePath) => {
+        // Set correct MIME types for common file types
+        if (filePath.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        } else if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        }
+    }
+}));
 
 // Fallback: JSON file storage (if MongoDB not available)
 const fs = require('fs');
@@ -223,9 +233,17 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Serve index.html for root path (Vercel compatibility)
+// Serve HTML pages (after static middleware)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/dingolay.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dingolay.html'));
+});
+
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'register.html'));
 });
 
 // Graceful shutdown
