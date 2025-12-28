@@ -231,14 +231,20 @@ process.on('SIGINT', async () => {
     process.exit(0);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log('Make sure to set up your Stripe keys in .env file');
-    if (db) {
-        console.log('✅ Using MongoDB for data storage');
-    } else {
-        console.log('⚠️  Using JSON file for data storage (MongoDB not configured)');
-    }
-});
+// Start server (only if not in Vercel serverless environment)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log('Make sure to set up your Stripe keys in .env file');
+        if (db) {
+            console.log('✅ Using MongoDB for data storage');
+        } else {
+            console.log('⚠️  Using JSON file for data storage (MongoDB not configured)');
+        }
+    });
+}
+
+// Export for Vercel serverless
+module.exports = app;
 
 
