@@ -63,13 +63,21 @@ connectToMongoDB().catch(err => {
 app.use(cors());
 app.use(express.json());
 // Serve static files with correct MIME types
-app.use(express.static('.', {
+// Use process.cwd() for Vercel compatibility
+const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+app.use(express.static(staticPath, {
     setHeaders: (res, filePath) => {
         // Set correct MIME types for common file types
         if (filePath.endsWith('.css')) {
             res.setHeader('Content-Type', 'text/css');
         } else if (filePath.endsWith('.js')) {
             res.setHeader('Content-Type', 'application/javascript');
+        } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
+            res.setHeader('Content-Type', 'image/jpeg');
+        } else if (filePath.endsWith('.png')) {
+            res.setHeader('Content-Type', 'image/png');
+        } else if (filePath.endsWith('.mp4')) {
+            res.setHeader('Content-Type', 'video/mp4');
         }
     }
 }));
@@ -233,17 +241,34 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Serve HTML pages (after static middleware)
+// Serve HTML pages
+const basePath = process.env.VERCEL ? process.cwd() : __dirname;
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(basePath, 'index.html'));
 });
 
 app.get('/dingolay.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dingolay.html'));
+    res.sendFile(path.join(basePath, 'dingolay.html'));
 });
 
 app.get('/register.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'register.html'));
+    res.sendFile(path.join(basePath, 'register.html'));
+});
+
+// Fallback for static files that Express static middleware might miss
+app.get('*', (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api/')) {
+        return next();
+    }
+    // Try to serve as static file
+    const filePath = path.join(basePath, req.path);
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+        return res.sendFile(filePath);
+    }
+    // 404 for missing files
+    res.status(404).send('File not found');
 });
 
 // Graceful shutdown
