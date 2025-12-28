@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFCA Movements Presents: Dingolay 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Dingolay 2026 Specific Styles - Bright, Vibrant, Caribbean Carnival Colors */
+        :root {
+            --carnival-red: #FF1744;
+            --carnival-orange: #FF6F00;
+            --carnival-yellow: #FFD600;
+            --carnival-green: #00E676;
+            --carnival-blue: #00B0FF;
+            --carnival-purple: #7C4DFF;
+            --carnival-pink: #E91E63;
+            --carnival-gold: #FFC107;
+            --dark-bg: #1A1A1A;
+        }
+
+        body.dingolay-page {
+            background: linear-gradient(135deg, #FF1744 0%, #FF6F00 25%, #FFD600 50%, #00E676 75%, #00B0FF 100%);
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .dingolay-hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            overflow: hidden;
+        }
+
+        .dingolay-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('Dingolay/image art.jpg') -100% 5% / cover no-repeat;
+            /* Enhance colors without blur */
+            filter: saturate(1.5) brightness(1.2) contrast(1.1);
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        .dingolay-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Subtle overlay to enhance color vibrancy */
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.05) 100%);
+            z-index: 1;
+        }
+
+        .dingolay-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            padding-top: 6rem;
+        }
+
+        .afca-logo-header {
+            margin-bottom: 2rem;
+        }
+
+        .afca-logo-header img {
+            max-height: 120px;
+            width: auto;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .presents-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .dingolay-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #FFD600, #FF1744, #00E676, #00B0FF, #7C4DFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+            margin: 1rem 0;
+            line-height: 1.1;
+            animation: rainbow-shift 3s ease-in-out infinite;
+        }
+
+        .year-2026 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--carnival-gold);
+            text-shadow: 
+                0 0 10px rgba(255, 193, 7, 0.8),
+                0 0 20px rgba(255, 193, 7, 0.6),
+                2px 2px 8px rgba(0, 0, 0, 0.8);
+            margin-top: 0.5rem;
+            letter-spacing: 8px;
+        }
+
+        @keyframes rainbow-shift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(20deg); }
+        }
+
+        .dingolay-subtitle {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            margin: 2rem 0;
+            line-height: 1.4;
+        }
+
+        .workshop-tagline {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        .dingolay-section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .dingolay-about {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .dingolay-about .container {
+            max-width: 1000px;
+        }
+
+        .dingolay-about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text-large {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .culture-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .culture-video-background {
+            position: absolute;
+            top: 0;
+            left: calc(50% + 0.75rem);
+            width: calc(50% - 0.75rem);
+            height: calc(50% - 0.75rem);
+            z-index: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            opacity: 0.5;
+        }
+
+        .culture-video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .culture-item {
+            position: relative;
+            z-index: 1;
+        }
+
+        .culture-item:nth-child(2) {
+            background: linear-gradient(135deg, rgba(255, 214, 0, 0.3), rgba(255, 111, 0, 0.3));
+            backdrop-filter: blur(1px);
+            overflow: hidden;
+        }
+
+        .culture-item-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .culture-item:nth-child(2) .culture-icon,
+        .culture-item:nth-child(2) h3,
+        .culture-item:nth-child(2) p {
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .culture-item {
+            background: linear-gradient(135deg, var(--carnival-red), var(--carnival-orange));
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .culture-item:nth-child(2) {
+            background: linear-gradient(135deg, var(--carnival-yellow), var(--carnival-orange));
+            box-shadow: 0 8px 25px rgba(255, 214, 0, 0.4);
+        }
+
+        .culture-item:nth-child(3) {
+            background: linear-gradient(135deg, var(--carnival-green), var(--carnival-blue));
+            box-shadow: 0 8px 25px rgba(0, 230, 118, 0.4);
+        }
+
+        .culture-item:nth-child(4) {
+            background: linear-gradient(135deg, var(--carnival-purple), var(--carnival-pink));
+            box-shadow: 0 8px 25px rgba(124, 77, 255, 0.4);
+        }
+
+        .culture-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .culture-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .culture-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .flyers-gallery {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .flyers-gallery .section-header h2,
+        .flyers-gallery .section-description {
+            color: white;
+        }
+
+        .flyers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .flyer-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+        }
+
+        .flyer-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .flyer-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .workshop-details {
+            background: linear-gradient(135deg, rgba(255, 23, 68, 0.95), rgba(255, 111, 0, 0.95));
+            color: white;
+        }
+
+        .workshop-details .section-header h2 {
+            color: white;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .detail-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            border-color: var(--carnival-gold);
+        }
+
+        .detail-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .detail-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--carnival-gold);
+            font-weight: 700;
+        }
+
+        .detail-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .children-art-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .children-art-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .children-art-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--carnival-purple), var(--carnival-blue));
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-dingolay {
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-dingolay-primary {
+            background: var(--carnival-gold);
+            color: var(--dark-bg);
+        }
+
+        .btn-dingolay-primary:hover {
+            background: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.6);
+        }
+
+        .btn-dingolay-secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+        }
+
+        .btn-dingolay-secondary:hover {
+            background: white;
+            color: var(--carnival-purple);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .back-home {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--carnival-red);
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: var(--carnival-red);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .dingolay-title {
+                font-size: 3.5rem;
+            }
+
+            .year-2026 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .dingolay-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .dingolay-about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .culture-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .back-home {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: inline-block;
+                margin: 1rem 20px;
+            }
+        }
+    </style>
+</head>
+<body class="dingolay-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="Dingolay/Afca Logo.jpg" alt="AFCA Movements Logo" class="logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#performances">Performances</a></li>
+                <li><a href="dingolay.html">Dingolay 2026</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <a href="index.html" class="back-home">← Back to Home</a>
+
+    <!-- Hero Section -->
+    <section class="dingolay-hero">
+        <div class="dingolay-hero-content">
+            <div class="afca-logo-header">
+              
+            </div>
+            <div class="presents-text">PRESENTS</div>
+            <h1 class="dingolay-title">DINGOLAY</h1>
+            <div class="year-2026">2026</div>
+            <p class="dingolay-subtitle">Dance Culture & Drumming Workshop</p>
+            <p class="workshop-tagline">Celebrating Windrush Generation • Caribbean Culture • Carnival Heritage</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="dingolay-section dingolay-about">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: var(--carnival-red);">About Dingolay 2026</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="dingolay-about-content">
+                <div>
+                    <p class="about-text-large">
+                        <strong>Dingolay 2026</strong> is a vibrant celebration of Caribbean dance culture, drumming traditions, and the rich heritage of the Windrush generation. This community-focused workshop brings together people of all ages to learn, celebrate, and preserve the beautiful traditions of Caribbean carnival culture.
+                    </p>
+                    <p class="about-text-large" style="margin-top: 1.5rem;">
+                        Through dance, rhythm, and storytelling, we honor the contributions of the Windrush generation and explore the dynamic world of Caribbean carnival arts. Join us for an immersive experience that connects communities through culture, movement, and music.
+                    </p>
+                </div>
+                <div class="culture-highlights">
+                    <div class="culture-item">
+                        <div class="culture-icon">🕺</div>
+                        <h3>Dance Culture</h3>
+                        <p>Learn traditional and contemporary Caribbean dance movements</p>
+                    </div>
+                    <div class="culture-item">
+                        <video class="culture-item-video" autoplay muted loop playsinline>
+                            <source src="Dingolay/VID-20251218-WA0022.mp4" type="video/mp4">
+                        </video>
+                        <div class="culture-icon">🥁</div>
+                        <h3>Drumming</h3>
+                        <p>Master the rhythms and beats of Caribbean percussion</p>
+                    </div>
+                    <div class="culture-item">
+                        <div class="culture-icon">🌴</div>
+                        <h3>Windrush Heritage</h3>
+                        <p>Explore the history and legacy of the Windrush generation</p>
+                    </div>
+                    <div class="culture-item">
+                        <div class="culture-icon">🎭</div>
+                        <h3>Carnival Culture</h3>
+                        <p>Experience the vibrant world of Caribbean carnival traditions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Details -->
+    <section class="dingolay-section workshop-details">
+        <div class="container">
+            <div class="section-header">
+                <h2>Workshop Highlights</h2>
+                <div class="underline" style="background: linear-gradient(90deg, white, var(--carnival-gold));"></div>
+                <p class="section-description" style="color: rgba(255, 255, 255, 0.95);">
+                    A comprehensive program designed for the community to learn, celebrate, and preserve Caribbean culture and heritage
+                </p>
+            </div>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">💃</div>
+                    <h3>Dance Workshops</h3>
+                    <p>Learn authentic Caribbean dance styles including soca, calypso, and traditional folk dances. All skill levels welcome!</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🎵</div>
+                    <h3>Drumming Sessions</h3>
+                    <p>Master Caribbean drumming techniques and rhythms. Experience the power of collective percussion and learn traditional patterns.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">📚</div>
+                    <h3>Cultural Education</h3>
+                    <p>Discover the rich history of the Windrush generation and their contributions to British culture and society.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🎨</div>
+                    <h3>Carnival Arts</h3>
+                    <p>Explore carnival costume design, masquerade traditions, and the vibrant visual arts of Caribbean carnival culture.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Community Focus</h3>
+                    <p>Open to all ages and abilities. A welcoming space for families and individuals to connect through culture.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🌟</div>
+                    <h3>Heritage Celebration</h3>
+                    <p>Honor and preserve the traditions, stories, and cultural practices passed down through generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flyers Gallery -->
+    <section class="dingolay-section flyers-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Event Flyers</h2>
+                <div class="underline" style="background: linear-gradient(90deg, var(--carnival-gold), var(--carnival-red));"></div>
+                <p class="section-description">
+                    Check out our vibrant promotional materials for Dingolay 2026
+                </p>
+            </div>
+            <div class="flyers-grid">
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/Promo Flyer.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/Promo Flyer.jpg" alt="Dingolay 2026 Promo Flyer">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/Promo Flyer 2.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/Promo Flyer 2.jpg" alt="Dingolay 2026 Promo Flyer 2">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/Promo Flyer 3.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/Promo Flyer 3.jpg" alt="Dingolay 2026 Promo Flyer 3">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/Promo Flyer 4.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/Promo Flyer 4.jpg" alt="Dingolay 2026 Promo Flyer 4">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/Promo Flyer 5.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/Promo Flyer 5.jpg" alt="Dingolay 2026 Promo Flyer 5">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/promo 6.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/promo 6.jpg" alt="Dingolay 2026 Promo 6">
+                    </div>
+                </div>
+                <div class="flyer-card">
+                    <div class="gallery-link" data-lightbox="Dingolay/promo 7.jpg" data-lightbox-group="dingolay-flyers">
+                        <img src="Dingolay/promo 7.jpg" alt="Dingolay 2026 Promo 7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Children's Art Section -->
+    <section class="dingolay-section children-art-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: var(--carnival-purple);">Community Art</h2>
+                <div class="underline" style="background: linear-gradient(90deg, var(--carnival-purple), var(--carnival-pink));"></div>
+                <p class="section-description">
+                    Celebrating the creativity and spirit of our community
+                </p>
+            </div>
+            <div class="children-art-container">
+                <div class="gallery-link" data-lightbox="Dingolay/childrens art.jpg" data-lightbox-group="dingolay-art">
+                    <img src="Dingolay/childrens art.jpg" alt="Children's Art - Dingolay 2026">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Join Us for Dingolay 2026!</h2>
+            <p>Be part of this vibrant celebration of Caribbean culture, dance, and heritage</p>
+            <div class="cta-buttons">
+                <a href="register.html" class="btn-dingolay btn-dingolay-primary">Register Now</a>
+                <a href="index.html#contact" class="btn-dingolay btn-dingolay-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image">&times;</button>
+            <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&#10094;</button>
+            <img src="" alt="" id="lightbox-image">
+            <button class="lightbox-nav lightbox-next" aria-label="Next image">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="Dingolay/Afca Logo.jpg" alt="AFCA Movements Logo">
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#performances">Performances</a>
+                    <a href="dingolay.html">Dingolay 2026</a>
+                    <a href="index.html#gallery">Gallery</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AFCA Movements. Celebrating African Roots, Culture & Community Spirit.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Dingolay 2026 - AFCA Movements</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --carnival-red: #FF1744;
+            --carnival-orange: #FF6F00;
+            --carnival-yellow: #FFD600;
+            --carnival-green: #00E676;
+            --carnival-blue: #00B0FF;
+            --carnival-purple: #7C4DFF;
+            --carnival-pink: #E91E63;
+            --carnival-gold: #FFC107;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FF1744 0%, #FF6F00 25%, #FFD600 50%, #00E676 75%, #00B0FF 100%);
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+        }
+
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .registration-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--carnival-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .registration-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .fee-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h2 {
+            font-size: 1.5rem;
+            color: var(--carnival-purple);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--carnival-gold);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--carnival-gold);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .required {
+            color: var(--carnival-red);
+        }
+
+        .payment-section {
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.1), rgba(233, 30, 99, 0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .payment-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--carnival-purple);
+            margin: 1rem 0;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--carnival-purple), var(--carnival-blue));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(124, 77, 255, 0.4);
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(124, 77, 255, 0.6);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .success-message,
+        .error-message {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: rgba(0, 230, 118, 0.2);
+            color: var(--carnival-green);
+            border: 2px solid var(--carnival-green);
+        }
+
+        .error-message {
+            background: rgba(255, 23, 68, 0.2);
+            color: var(--carnival-red);
+            border: 2px solid var(--carnival-red);
+        }
+
+        .success-message.active,
+        .error-message.active {
+            display: block;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--carnival-purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--carnival-red);
+        }
+
+        .info-box {
+            background: rgba(0, 176, 255, 0.1);
+            border: 2px solid var(--carnival-blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .registration-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="Dingolay/Afca Logo.jpg" alt="AFCA Movements Logo" class="logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#performances">Performances</a></li>
+                <li><a href="dingolay.html">Dingolay 2026</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+        <a href="dingolay.html" class="back-link">← Back to Dingolay 2026</a>
+        
+        <div class="registration-header">
+            <h1>Register for Dingolay 2026</h1>
+            <p>Join us for this vibrant celebration of Caribbean culture, dance, and heritage</p>
+            <div class="fee-badge">Registration Fee: £25</div>
+        </div>
+
+        <form id="registration-form">
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageGroup">Age Group <span class="required">*</span></label>
+                        <select id="ageGroup" name="ageGroup" required>
+                            <option value="">Select Age Group</option>
+                            <option value="child">Child (Under 12)</option>
+                            <option value="teen">Teen (13-17)</option>
+                            <option value="adult">Adult (18-64)</option>
+                            <option value="senior">Senior (65+)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-section">
+                <h2>Address Information</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="address">Street Address <span class="required">*</span></label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">Postcode <span class="required">*</span></label>
+                        <input type="text" id="postcode" name="postcode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country <span class="required">*</span></label>
+                        <input type="text" id="country" name="country" value="United Kingdom" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workshop Preferences -->
+            <div class="form-section">
+                <h2>Workshop Preferences</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Which workshops are you interested in? <span class="required">*</span></label>
+                        <div style="margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" name="workshops" value="dance" style="width: auto; margin-right: 0.5rem;">
+                                Dance Workshops
+                            </label>
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" name="workshops" value="drumming" style="width: auto; margin-right: 0.5rem;">
+                                Drumming Sessions
+                            </label>
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" name="workshops" value="cultural" style="width: auto; margin-right: 0.5rem;">
+                                Cultural Education
+                            </label>
+                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" name="workshops" value="carnival" style="width: auto; margin-right: 0.5rem;">
+                                Carnival Arts
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="experience">Previous Experience Level</label>
+                        <select id="experience" name="experience">
+                            <option value="">Select Experience Level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="additionalInfo">Additional Information or Special Requirements</label>
+                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Any dietary requirements, accessibility needs, or other information we should know..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="form-section">
+                <h2>Emergency Contact</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="emergencyName">Emergency Contact Name <span class="required">*</span></label>
+                        <input type="text" id="emergencyName" name="emergencyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyPhone">Emergency Contact Phone <span class="required">*</span></label>
+                        <input type="tel" id="emergencyPhone" name="emergencyPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyRelation">Relationship <span class="required">*</span></label>
+                        <input type="text" id="emergencyRelation" name="emergencyRelation" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="form-section payment-section">
+                <h2>Payment Information</h2>
+                <div class="payment-amount">Total: £25.00</div>
+                <p style="color: #666; margin-bottom: 1rem;">
+                    You will be redirected to Stripe's secure payment page to complete your registration
+                </p>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label style="display: flex; align-items: flex-start; font-weight: normal;">
+                        <input type="checkbox" id="terms" name="terms" required style="width: auto; margin-right: 0.5rem; margin-top: 0.3rem;">
+                        <span>I agree to the <a href="#" style="color: var(--carnival-purple);">Terms and Conditions</a> and <a href="#" style="color: var(--carnival-purple);">Privacy Policy</a> <span class="required">*</span></span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-button">
+                Continue to Payment
+            </button>
+
+            <div class="loading" id="loading">
+                Processing your registration...
+            </div>
+
+            <div class="success-message" id="success-message">
+                <h3>Registration Successful! 🎉</h3>
+                <p>Thank you for registering for Dingolay 2026. A confirmation email has been sent to your email address.</p>
+            </div>
+
+            <div class="error-message" id="error-message">
+                <h3>Registration Failed</h3>
+                <p id="error-text">There was an error processing your registration. Please try again.</p>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="register-simple.js"></script>
+</body>
+</html>
+
+
+
