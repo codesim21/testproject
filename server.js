@@ -64,6 +64,7 @@ app.use(cors());
 app.use(express.json());
 // Serve static files (works on both Vercel and local)
 const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+// Always serve static files - Vercel will try to serve them first, but this is a fallback
 app.use(express.static(staticPath, {
     setHeaders: (res, filePath) => {
         if (filePath.endsWith('.css')) {
