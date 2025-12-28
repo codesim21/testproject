@@ -62,26 +62,27 @@ connectToMongoDB().catch(err => {
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serve static files (works on both Vercel and local)
-const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
-// Always serve static files - Vercel will try to serve them first, but this is a fallback
-app.use(express.static(staticPath, {
-    setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        } else if (filePath.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
-            res.setHeader('Content-Type', 'image/jpeg');
-        } else if (filePath.endsWith('.png')) {
-            res.setHeader('Content-Type', 'image/png');
-        } else if (filePath.endsWith('.mp4')) {
-            res.setHeader('Content-Type', 'video/mp4');
-        } else if (filePath.endsWith('.svg')) {
-            res.setHeader('Content-Type', 'image/svg+xml');
+// Serve static files only for local development
+// On Vercel, static files are served automatically
+if (!process.env.VERCEL) {
+    app.use(express.static(__dirname, {
+        setHeaders: (res, filePath) => {
+            if (filePath.endsWith('.css')) {
+                res.setHeader('Content-Type', 'text/css');
+            } else if (filePath.endsWith('.js')) {
+                res.setHeader('Content-Type', 'application/javascript');
+            } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
+                res.setHeader('Content-Type', 'image/jpeg');
+            } else if (filePath.endsWith('.png')) {
+                res.setHeader('Content-Type', 'image/png');
+            } else if (filePath.endsWith('.mp4')) {
+                res.setHeader('Content-Type', 'video/mp4');
+            } else if (filePath.endsWith('.svg')) {
+                res.setHeader('Content-Type', 'image/svg+xml');
+            }
         }
-    }
-}));
+    }));
+}
 
 // Fallback: JSON file storage (if MongoDB not available)
 const fs = require('fs');
@@ -242,20 +243,20 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Serve HTML pages (works on both Vercel and local)
-const basePath = process.env.VERCEL ? process.cwd() : __dirname;
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(basePath, 'index.html'));
-});
-
-app.get('/dingolay.html', (req, res) => {
-    res.sendFile(path.join(basePath, 'dingolay.html'));
-});
-
-app.get('/register.html', (req, res) => {
-    res.sendFile(path.join(basePath, 'register.html'));
-});
+// Serve HTML pages only for local development
+// On Vercel, HTML files are served automatically as static files
+if (!process.env.VERCEL) {
+    const basePath = __dirname;
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(basePath, 'index.html'));
+    });
+    app.get('/dingolay.html', (req, res) => {
+        res.sendFile(path.join(basePath, 'dingolay.html'));
+    });
+    app.get('/register.html', (req, res) => {
+        res.sendFile(path.join(basePath, 'register.html'));
+    });
+}
 
 // Explicit static file handler - this catches files that express.static might miss
 // This is especially important on Vercel where file paths might be different
