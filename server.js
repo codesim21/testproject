@@ -62,25 +62,25 @@ connectToMongoDB().catch(err => {
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serve static files only for local development
-// On Vercel, static files are served automatically
-if (!process.env.VERCEL) {
-    app.use(express.static(__dirname, {
-        setHeaders: (res, filePath) => {
-            if (filePath.endsWith('.css')) {
-                res.setHeader('Content-Type', 'text/css');
-            } else if (filePath.endsWith('.js')) {
-                res.setHeader('Content-Type', 'application/javascript');
-            } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
-                res.setHeader('Content-Type', 'image/jpeg');
-            } else if (filePath.endsWith('.png')) {
-                res.setHeader('Content-Type', 'image/png');
-            } else if (filePath.endsWith('.mp4')) {
-                res.setHeader('Content-Type', 'video/mp4');
-            }
+// Serve static files (works on both Vercel and local)
+const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+app.use(express.static(staticPath, {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        } else if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
+            res.setHeader('Content-Type', 'image/jpeg');
+        } else if (filePath.endsWith('.png')) {
+            res.setHeader('Content-Type', 'image/png');
+        } else if (filePath.endsWith('.mp4')) {
+            res.setHeader('Content-Type', 'video/mp4');
+        } else if (filePath.endsWith('.svg')) {
+            res.setHeader('Content-Type', 'image/svg+xml');
         }
-    }));
-}
+    }
+}));
 
 // Fallback: JSON file storage (if MongoDB not available)
 const fs = require('fs');
