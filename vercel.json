@@ -10,22 +10,6 @@
     {
       "src": "/api/(.*)",
       "dest": "server.js"
-    },
-    {
-      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|svg|mp4|json|ico|webp))",
-      "dest": "server.js"
-    },
-    {
-      "src": "/",
-      "dest": "server.js"
-    },
-    {
-      "src": "/dingolay.html",
-      "dest": "server.js"
-    },
-    {
-      "src": "/register.html",
-      "dest": "server.js"
     }
   ]
 }

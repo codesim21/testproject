@@ -79,7 +79,7 @@ form.addEventListener('submit', async (e) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount: 1000, // £10.00 in pence
+                amount: 2500, // £25.00 in pence
                 currency: 'gbp',
                 registrationData: registrationData
             }),
