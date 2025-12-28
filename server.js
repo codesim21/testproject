@@ -258,44 +258,8 @@ if (!process.env.VERCEL) {
     });
 }
 
-// Explicit static file handler - this catches files that express.static might miss
-// This is especially important on Vercel where file paths might be different
-app.get('*', (req, res, next) => {
-    // Skip API routes
-    if (req.path.startsWith('/api/')) {
-        return next();
-    }
-    
-    // Skip if already handled by HTML routes
-    if (req.path === '/' || req.path === '/dingolay.html' || req.path === '/register.html') {
-        return next();
-    }
-    
-    // Try to serve the file
-    const filePath = path.join(staticPath, req.path);
-    
-    // Check if file exists
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-        // Set correct MIME type
-        if (filePath.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        } else if (filePath.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
-            res.setHeader('Content-Type', 'image/jpeg');
-        } else if (filePath.endsWith('.png')) {
-            res.setHeader('Content-Type', 'image/png');
-        } else if (filePath.endsWith('.mp4')) {
-            res.setHeader('Content-Type', 'video/mp4');
-        } else if (filePath.endsWith('.svg')) {
-            res.setHeader('Content-Type', 'image/svg+xml');
-        }
-        return res.sendFile(filePath);
-    }
-    
-    // File not found - return 404
-    res.status(404).send('File not found: ' + req.path);
-});
+// On Vercel, static files and HTML are served automatically
+// We only handle API routes here
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
