@@ -243,20 +243,20 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Serve HTML pages only for local development
-// On Vercel, HTML files are served automatically as static files
-if (!process.env.VERCEL) {
-    const basePath = __dirname;
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(basePath, 'index.html'));
-    });
-    app.get('/dingolay.html', (req, res) => {
-        res.sendFile(path.join(basePath, 'dingolay.html'));
-    });
-    app.get('/register.html', (req, res) => {
-        res.sendFile(path.join(basePath, 'register.html'));
-    });
-}
+// Serve HTML pages (works on both Vercel and local)
+const basePath = process.env.VERCEL ? process.cwd() : __dirname;
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(basePath, 'index.html'));
+});
+
+app.get('/dingolay.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'dingolay.html'));
+});
+
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'register.html'));
+});
 
 // On Vercel, static files and HTML are served automatically
 // We only handle API routes here
