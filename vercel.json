@@ -18,5 +18,6 @@
       "dest": "server.js"
     }
   ],
-  "cleanUrls": true
+  "cleanUrls": true,
+  "trailingSlash": false
 }
