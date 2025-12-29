@@ -12,6 +12,10 @@
       "dest": "server.js"
     },
     {
+      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|svg|mp4|json|ico|webp|woff|woff2|ttf|eot))",
+      "handle": "filesystem"
+    },
+    {
       "src": "/dingolay.html",
       "dest": "server.js"
     },
