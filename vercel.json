@@ -20,13 +20,8 @@
       "dest": "server.js"
     },
     {
-      "src": "/index.html",
-      "dest": "server.js"
-    },
-    {
       "src": "/",
-      "dest": "/index.html",
-      "status": 200
+      "dest": "server.js"
     }
   ]
 }
