@@ -117,26 +117,6 @@ app.get('/api/registrations', (req, res) => {
     }
 });
 
-// Catch-all route for static files (must be after API routes)
-// This handles any static file requests that weren't caught by express.static
-app.get('*', (req, res, next) => {
-    // Skip if it's an API route
-    if (req.path.startsWith('/api/')) {
-        return next();
-    }
-    // Skip if it's an HTML page route
-    if (req.path === '/' || req.path === '/dingolay.html' || req.path === '/register.html') {
-        return next();
-    }
-    // Try to serve the file
-    const filePath = path.join(__dirname, req.path);
-    if (fs.existsSync(filePath)) {
-        res.sendFile(filePath);
-    } else {
-        res.status(404).send('File not found');
-    }
-});
-
 // Start server (only if not in Vercel serverless environment)
 if (require.main === module) {
     app.listen(PORT, () => {

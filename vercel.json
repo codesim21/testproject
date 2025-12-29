@@ -12,6 +12,12 @@
       "dest": "server.js"
     },
     {
+      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|svg|mp4|json|ico|webp|woff|woff2|ttf|eot))",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "src": "/dingolay.html",
       "dest": "server.js"
     },
@@ -22,12 +28,6 @@
     {
       "src": "/",
       "dest": "server.js"
-    },
-    {
-      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|svg|mp4|json|ico|webp|woff|woff2|ttf|eot))",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
     }
   ]
 }
