@@ -14,7 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files (works on both Vercel and local)
-const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+// On Vercel, files are in the same directory as server.js
+const staticPath = __dirname;
 app.use(express.static(staticPath, {
     setHeaders: (res, path) => {
         // Set correct MIME types
@@ -35,7 +36,7 @@ app.use(express.static(staticPath, {
 }));
 
 // Serve HTML pages
-const basePath = process.env.VERCEL ? process.cwd() : __dirname;
+const basePath = __dirname;
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(basePath, 'index.html'));
@@ -113,6 +114,26 @@ app.get('/api/registrations', (req, res) => {
     } catch (error) {
         console.error('Error reading registrations:', error);
         res.status(500).json({ error: error.message });
+    }
+});
+
+// Catch-all route for static files (must be after API routes)
+// This handles any static file requests that weren't caught by express.static
+app.get('*', (req, res, next) => {
+    // Skip if it's an API route
+    if (req.path.startsWith('/api/')) {
+        return next();
+    }
+    // Skip if it's an HTML page route
+    if (req.path === '/' || req.path === '/dingolay.html' || req.path === '/register.html') {
+        return next();
+    }
+    // Try to serve the file
+    const filePath = path.join(__dirname, req.path);
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        res.status(404).send('File not found');
     }
 });
 
