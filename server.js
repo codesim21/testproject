@@ -16,20 +16,27 @@ app.use(express.json());
 // Serve static files (works on both Vercel and local)
 // On Vercel, files are in the same directory as server.js
 const staticPath = __dirname;
+
+// Log for debugging (remove in production)
+if (process.env.VERCEL) {
+    console.log('Static path on Vercel:', staticPath);
+    console.log('Files in directory:', fs.readdirSync(staticPath).slice(0, 10));
+}
+
 app.use(express.static(staticPath, {
-    setHeaders: (res, path) => {
+    setHeaders: (res, filePath) => {
         // Set correct MIME types
-        if (path.endsWith('.css')) {
+        if (filePath.endsWith('.css')) {
             res.setHeader('Content-Type', 'text/css');
-        } else if (path.endsWith('.js')) {
+        } else if (filePath.endsWith('.js')) {
             res.setHeader('Content-Type', 'application/javascript');
-        } else if (path.endsWith('.jpg') || path.endsWith('.jpeg')) {
+        } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
             res.setHeader('Content-Type', 'image/jpeg');
-        } else if (path.endsWith('.png')) {
+        } else if (filePath.endsWith('.png')) {
             res.setHeader('Content-Type', 'image/png');
-        } else if (path.endsWith('.mp4')) {
+        } else if (filePath.endsWith('.mp4')) {
             res.setHeader('Content-Type', 'video/mp4');
-        } else if (path.endsWith('.svg')) {
+        } else if (filePath.endsWith('.svg')) {
             res.setHeader('Content-Type', 'image/svg+xml');
         }
     }
