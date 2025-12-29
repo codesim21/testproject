@@ -13,11 +13,26 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files (only for local development)
-// On Vercel, static files are served automatically
-if (!process.env.VERCEL) {
-    app.use(express.static(__dirname));
-}
+// Serve static files (works on both Vercel and local)
+const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+app.use(express.static(staticPath, {
+    setHeaders: (res, path) => {
+        // Set correct MIME types
+        if (path.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        } else if (path.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        } else if (path.endsWith('.jpg') || path.endsWith('.jpeg')) {
+            res.setHeader('Content-Type', 'image/jpeg');
+        } else if (path.endsWith('.png')) {
+            res.setHeader('Content-Type', 'image/png');
+        } else if (path.endsWith('.mp4')) {
+            res.setHeader('Content-Type', 'video/mp4');
+        } else if (path.endsWith('.svg')) {
+            res.setHeader('Content-Type', 'image/svg+xml');
+        }
+    }
+}));
 
 // Serve HTML pages
 const basePath = process.env.VERCEL ? process.cwd() : __dirname;
