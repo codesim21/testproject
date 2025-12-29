@@ -7,10 +7,17 @@ require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files ONLY for local development
+// On Vercel, static files are served automatically
+if (!process.env.VERCEL) {
+    app.use(express.static(__dirname));
+}
 
 // JSON file storage
 const registrationsFile = path.join(__dirname, 'registrations.json');
@@ -78,6 +85,14 @@ app.get('/api/registrations', (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+// Start server (only for local development)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log('Static files are served automatically on Vercel');
+    });
+}
 
 // Export for Vercel serverless function
 module.exports = app;
