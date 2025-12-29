@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
             --carnival-red: #FF1744;
@@ -112,6 +111,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
@@ -129,35 +129,6 @@
 
         .required {
             color: var(--carnival-red);
-        }
-
-        .payment-section {
-            background: linear-gradient(135deg, rgba(124, 77, 255, 0.1), rgba(233, 30, 99, 0.1));
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-        }
-
-        .payment-amount {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--carnival-purple);
-            margin: 1rem 0;
-        }
-
-        #card-element {
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            margin: 1rem 0;
-        }
-
-        #card-errors {
-            color: var(--carnival-red);
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
         }
 
         .submit-button {
@@ -186,16 +157,6 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .loading.active {
-            display: block;
         }
 
         .success-message,
@@ -406,19 +367,6 @@
                 </div>
             </div>
 
-            <!-- Payment Section -->
-            <div class="form-section payment-section">
-                <h2>Payment Information</h2>
-                <div class="payment-amount">Total: £25.00</div>
-                <p style="text-align: center; color: #666; margin-bottom: 1rem;">
-                    Secure payment powered by Stripe
-                </p>
-                <div id="card-element">
-                    <!-- Stripe Elements will create form elements here -->
-                </div>
-                <div id="card-errors" role="alert"></div>
-            </div>
-
             <!-- Terms and Conditions -->
             <div class="form-section">
                 <div class="form-group">
@@ -430,21 +378,17 @@
             </div>
 
             <button type="submit" class="submit-button" id="submit-button">
-                Complete Registration & Pay £25
+                Submit Registration
             </button>
 
-            <div class="loading" id="loading">
-                Processing your registration...
-            </div>
-
             <div class="success-message" id="success-message">
-                <h3>Registration Successful! 🎉</h3>
-                <p>Thank you for registering for Dingolay 2026. A confirmation email has been sent to your email address.</p>
+                <h3>Registration Submitted! 🎉</h3>
+                <p>Thank you for registering for Dingolay 2026. We will contact you shortly with further details.</p>
             </div>
 
             <div class="error-message" id="error-message">
                 <h3>Registration Failed</h3>
-                <p id="error-text">There was an error processing your registration. Please try again.</p>
+                <p id="error-text">Please fill in all required fields and try again.</p>
             </div>
         </form>
     </div>
@@ -453,6 +397,3 @@
     <script src="register.js"></script>
 </body>
 </html>
-
-
-
