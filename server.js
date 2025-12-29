@@ -13,11 +13,24 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files only for local development
-// On Vercel, static files are served automatically
-if (!process.env.VERCEL) {
-    app.use(express.static(__dirname));
-}
+// Serve static files (works on both Vercel and local)
+const staticPath = process.env.VERCEL ? process.cwd() : __dirname;
+app.use(express.static(staticPath));
+
+// Serve HTML pages
+const basePath = process.env.VERCEL ? process.cwd() : __dirname;
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(basePath, 'index.html'));
+});
+
+app.get('/dingolay.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'dingolay.html'));
+});
+
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(basePath, 'register.html'));
+});
 
 // JSON file storage
 const registrationsFile = path.join(__dirname, 'registrations.json');

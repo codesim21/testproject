@@ -10,6 +10,18 @@
     {
       "src": "/api/(.*)",
       "dest": "server.js"
+    },
+    {
+      "src": "/",
+      "dest": "server.js"
+    },
+    {
+      "src": "/dingolay.html",
+      "dest": "server.js"
+    },
+    {
+      "src": "/register.html",
+      "dest": "server.js"
     }
   ]
 }
