@@ -45,6 +45,22 @@ app.use(express.static(staticPath, {
 // Serve HTML pages
 const basePath = __dirname;
 
+// Check if request is for a static file - if so, let Vercel handle it
+app.use((req, res, next) => {
+    // If it's a static file request and file doesn't exist in serverless function, skip
+    const staticExtensions = ['.css', '.js', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.mp4', '.json', '.ico', '.webp', '.woff', '.woff2', '.ttf', '.eot'];
+    const isStaticFile = staticExtensions.some(ext => req.path.toLowerCase().endsWith(ext));
+    
+    if (isStaticFile) {
+        const filePath = path.join(basePath, req.path);
+        if (!fs.existsSync(filePath)) {
+            // File doesn't exist in serverless function - return 404 so Vercel can serve it
+            return res.status(404).end();
+        }
+    }
+    next();
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(basePath, 'index.html'));
 });
