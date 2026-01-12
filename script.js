@@ -45,13 +45,34 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Form submission
-const contactForm = document.querySelector('.contact-form form');
+// Form submission - Send to WhatsApp
+const contactForm = document.querySelector('#contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
-        contactForm.reset();
+        
+        // Get form values
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const message = document.getElementById('contact-message').value;
+        
+        // Construct WhatsApp message
+        const whatsappMessage = `Hello! I'm interested in AFCA Movements.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        
+        // Encode the message for URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        
+        // WhatsApp phone number (UK format: 447507263547)
+        const phoneNumber = '447507263547';
+        
+        // Open WhatsApp with pre-filled message
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Reset form after a short delay
+        setTimeout(() => {
+            contactForm.reset();
+        }, 500);
     });
 }
 
