@@ -57,7 +57,11 @@ if (contactForm) {
         const message = document.getElementById('contact-message').value;
         
         // Construct WhatsApp message
-        const whatsappMessage = `Hello! I'm interested in AFCA Movements.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        let whatsappMessage = `Hello! I'm interested in AFCA Movements.\n\nName: ${name}`;
+        if (email && email.trim() !== '') {
+            whatsappMessage += `\nEmail: ${email}`;
+        }
+        whatsappMessage += `\n\nMessage:\n${message}`;
         
         // Encode the message for URL
         const encodedMessage = encodeURIComponent(whatsappMessage);
