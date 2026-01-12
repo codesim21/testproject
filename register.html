@@ -175,6 +175,25 @@
             border: 2px solid var(--carnival-green);
         }
 
+        .payment-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+
+        .payment-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 193, 7, 0.6);
+        }
+
         .error-message {
             background: rgba(255, 23, 68, 0.2);
             color: var(--carnival-red);
@@ -383,7 +402,10 @@
 
             <div class="success-message" id="success-message">
                 <h3>Registration Submitted! 🎉</h3>
-                <p>Thank you for registering for Dingolay 2026. We will contact you shortly with further details.</p>
+                <p>Thank you for registering for Dingolay 2026. Please complete your payment below to finalize your registration.</p>
+                <a href="#" id="payment-link" class="payment-button" target="_blank" style="display: none;">
+                    Pay £10 Registration Fee
+                </a>
             </div>
 
             <div class="error-message" id="error-message">

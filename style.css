@@ -370,6 +370,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+    align-items: start;
 }
 
 .workshop-card {
@@ -378,6 +379,9 @@ section {
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .workshop-card:hover {
@@ -399,6 +403,10 @@ section {
     transition: transform 0.3s ease;
 }
 
+.workshop-card:first-child .workshop-image img {
+    object-position: center 30%;
+}
+
 .workshop-image:focus-visible {
     outline: 3px solid var(--primary-gold);
     outline-offset: 4px;
@@ -410,6 +418,9 @@ section {
 
 .workshop-content {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .workshop-content h3 {
@@ -422,6 +433,11 @@ section {
 .workshop-content p {
     color: var(--text-dark);
     line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.workshop-content p:last-child {
+    margin-bottom: 0;
 }
 
 /* Gallery Section */

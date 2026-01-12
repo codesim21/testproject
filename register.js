@@ -12,6 +12,11 @@ const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS tem
 const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Replace with your EmailJS public key
 const YOUR_EMAIL = 'your-email@example.com'; // Replace with your email address
 
+// Stripe Payment Link - REPLACE WITH YOUR STRIPE PAYMENT LINK
+// Create one at: https://dashboard.stripe.com/payment-links
+// Format: https://buy.stripe.com/YOUR_LINK_ID
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/YOUR_PAYMENT_LINK_ID'; // Replace with your Stripe Payment Link
+
 // Initialize EmailJS
 if (typeof emailjs !== 'undefined') {
     emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -68,6 +73,14 @@ form.addEventListener('submit', async (e) => {
         
         // Show success message
         successMessage.classList.add('active');
+        
+        // Show and configure payment button
+        const paymentLink = document.getElementById('payment-link');
+        if (paymentLink && STRIPE_PAYMENT_LINK && STRIPE_PAYMENT_LINK !== 'https://buy.stripe.com/YOUR_PAYMENT_LINK_ID') {
+            paymentLink.href = STRIPE_PAYMENT_LINK;
+            paymentLink.style.display = 'inline-block';
+        }
+        
         form.reset();
         submitButton.disabled = false;
         submitButton.textContent = 'Submit Registration';
