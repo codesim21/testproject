@@ -1,0 +1,412 @@
+/* Carnival 2026 — homepage theme */
+:root {
+    --carnival-red: #FF1744;
+    --carnival-orange: #FF6F00;
+    --carnival-yellow: #FFD600;
+    --carnival-green: #00E676;
+    --carnival-blue: #00B0FF;
+    --carnival-purple: #7C4DFF;
+    --carnival-pink: #E91E63;
+    --carnival-gold: #FFC107;
+    --carnival-dark: #0d0d0d;
+}
+
+body.carnival-page {
+    background: var(--carnival-dark);
+    color: #fff;
+}
+
+body.carnival-page .navbar {
+    background: rgba(13, 13, 13, 0.92);
+}
+
+body.carnival-page .nav-menu a:hover,
+body.carnival-page .footer-links a:hover {
+    color: var(--carnival-gold);
+}
+
+body.carnival-page .nav-menu a::after {
+    background: var(--carnival-gold);
+}
+
+.back-home {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    z-index: 999;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    background: rgba(13, 13, 13, 0.75);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.back-home:hover {
+    background: var(--carnival-gold);
+    color: var(--carnival-dark);
+}
+
+@media (max-width: 768px) {
+    .back-home {
+        top: 75px;
+        left: 10px;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.75rem;
+    }
+}
+
+/* Hero */
+.carnival-hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 80px;
+    overflow: hidden;
+}
+
+.carnival-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('carnival 2026/IMG-20260521-WA0022.jpg') center center / cover no-repeat;
+    filter: saturate(1.1) brightness(0.45);
+    z-index: 1;
+}
+
+.carnival-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(13, 13, 13, 0.92) 0%,
+        rgba(255, 23, 68, 0.45) 40%,
+        rgba(124, 77, 255, 0.4) 70%,
+        rgba(13, 13, 13, 0.95) 100%
+    );
+    z-index: 2;
+}
+
+.carnival-hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 900px;
+}
+
+body.carnival-page .logo-container a {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+body.carnival-page .logo-container .logo {
+    height: 100%;
+    width: auto;
+    max-height: 60px;
+}
+
+.carnival-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--carnival-yellow), var(--carnival-red), var(--carnival-green), var(--carnival-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.carnival-hero .year-badge {
+    display: inline-block;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--carnival-gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+}
+
+.carnival-hero .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.carnival-hero .hero-partners {
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--carnival-gold);
+    margin-bottom: 2rem;
+}
+
+.carnival-hero .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-carnival {
+    padding: 1rem 2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-carnival-primary {
+    background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
+    color: var(--carnival-dark);
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.4);
+}
+
+.btn-carnival-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 193, 7, 0.55);
+}
+
+.btn-carnival-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn-carnival-outline:hover {
+    background: #fff;
+    color: var(--carnival-dark);
+    transform: translateY(-2px);
+}
+
+/* Intro */
+.carnival-intro {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, var(--carnival-dark) 0%, #1a1020 100%);
+}
+
+.carnival-intro .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.carnival-intro .intro-card {
+    text-align: center;
+    padding: 1.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carnival-intro .intro-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--carnival-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.carnival-intro .intro-card p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Section headers — carnival */
+.carnival-section .section-header h2 {
+    color: #fff;
+}
+
+.carnival-section .section-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.carnival-section .underline {
+    background: linear-gradient(90deg, var(--carnival-red), var(--carnival-gold), var(--carnival-green));
+}
+
+/* Costumes grid */
+.carnival-costumes {
+    padding: 5rem 0;
+    background: #121212;
+}
+
+.costume-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+}
+
+.costume-card {
+    background: #1e1e1e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.costume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(255, 23, 68, 0.2);
+}
+
+.costume-card .costume-image-wrap {
+    position: relative;
+    background: #0a0a0a;
+}
+
+.costume-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+}
+
+.costume-card .costume-info {
+    padding: 1.25rem 1.5rem;
+    border-top: 3px solid var(--carnival-gold);
+}
+
+.costume-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+
+.costume-card .costume-meta {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.costume-card .costume-price {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--carnival-gold);
+}
+
+/* Portraits strip */
+.carnival-portraits {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1a0a14 0%, #0a1420 100%);
+}
+
+.portrait-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.portrait-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.portrait-card:hover {
+    transform: scale(1.02);
+}
+
+.portrait-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.portrait-card figcaption {
+    padding: 0.75rem 1rem;
+    background: #fff;
+    color: var(--carnival-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Dingolay CTA */
+.carnival-cta {
+    padding: 5rem 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--carnival-purple) 0%, var(--carnival-red) 50%, var(--carnival-orange) 100%);
+}
+
+.carnival-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.carnival-cta p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Contact — dark theme */
+body.carnival-page .contact {
+    background: #1a1a1a;
+}
+
+body.carnival-page .contact .section-header h2 {
+    color: #fff;
+}
+
+body.carnival-page .contact .section-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+body.carnival-page .contact-item h3 {
+    color: var(--carnival-gold);
+}
+
+body.carnival-page .contact-item p,
+body.carnival-page .contact-item a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+body.carnival-page .contact-item a:hover {
+    color: var(--carnival-gold);
+}
+
+body.carnival-page .contact-form {
+    background: #252525;
+}
+
+body.carnival-page .form-group input,
+body.carnival-page .form-group textarea {
+    background: #1a1a1a;
+    border-color: #444;
+    color: #fff;
+}
+
+body.carnival-page .form-group input::placeholder,
+body.carnival-page .form-group textarea::placeholder {
+    color: #888;
+}
+
+body.carnival-page .btn-primary {
+    background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
+    color: var(--carnival-dark);
+}
+
+@media (max-width: 768px) {
+    .costume-grid {
+        grid-template-columns: 1fr;
+    }
+}

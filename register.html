@@ -3,39 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register for Dingolay 2026 - AFCA Movements</title>
+    <title>Register for Carnival 2026 - AFCA Movements</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="carnival-2026.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --carnival-red: #FF1744;
-            --carnival-orange: #FF6F00;
-            --carnival-yellow: #FFD600;
-            --carnival-green: #00E676;
-            --carnival-blue: #00B0FF;
-            --carnival-purple: #7C4DFF;
-            --carnival-pink: #E91E63;
-            --carnival-gold: #FFC107;
-        }
-
-        body {
-            background: linear-gradient(135deg, #FF1744 0%, #FF6F00 25%, #FFD600 50%, #00E676 75%, #00B0FF 100%);
-            background-attachment: fixed;
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
+        body.carnival-page.register-page {
+            background: var(--carnival-dark);
             padding: 100px 20px 50px;
+            min-height: 100vh;
         }
 
         .registration-container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: #1e1e1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .registration-header {
@@ -46,25 +34,25 @@
         .registration-header h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            color: var(--carnival-red);
+            color: var(--carnival-gold);
             margin-bottom: 0.5rem;
         }
 
         .registration-header p {
-            font-size: 1.2rem;
-            color: #666;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
         }
 
-        .fee-badge {
+        .whatsapp-badge {
             display: inline-block;
-            background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
         }
 
         .form-section {
@@ -72,11 +60,11 @@
         }
 
         .form-section h2 {
-            font-size: 1.5rem;
-            color: var(--carnival-purple);
-            margin-bottom: 1.5rem;
+            font-size: 1.35rem;
+            color: var(--carnival-gold);
+            margin-bottom: 1.25rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--carnival-gold);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.35);
         }
 
         .form-grid {
@@ -86,7 +74,7 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
         }
 
         .form-group.full-width {
@@ -97,7 +85,7 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #333;
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.95rem;
         }
 
@@ -106,12 +94,19 @@
         .form-group textarea {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #ddd;
+            border: 2px solid #444;
             border-radius: 10px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
+            background: #141414;
+            color: #fff;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             box-sizing: border-box;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
         }
 
         .form-group input:focus,
@@ -134,23 +129,22 @@
         .submit-button {
             width: 100%;
             padding: 1.2rem;
-            background: linear-gradient(135deg, var(--carnival-purple), var(--carnival-blue));
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(124, 77, 255, 0.4);
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
             margin-top: 2rem;
         }
 
         .submit-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(124, 77, 255, 0.6);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
         }
 
         .submit-button:disabled {
@@ -166,38 +160,23 @@
             border-radius: 10px;
             margin-top: 1.5rem;
             text-align: center;
-            font-weight: 600;
         }
 
         .success-message {
-            background: rgba(0, 230, 118, 0.2);
-            color: var(--carnival-green);
-            border: 2px solid var(--carnival-green);
+            background: rgba(37, 211, 102, 0.15);
+            color: #7dffb8;
+            border: 2px solid #25D366;
         }
 
-        .payment-button {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--carnival-gold), var(--carnival-orange));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
-        }
-
-        .payment-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 193, 7, 0.6);
+        .success-message h3 {
+            margin-bottom: 0.5rem;
         }
 
         .error-message {
-            background: rgba(255, 23, 68, 0.2);
-            color: var(--carnival-red);
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff8a9b;
             border: 2px solid var(--carnival-red);
+            font-weight: 600;
         }
 
         .success-message.active,
@@ -208,14 +187,26 @@
         .back-link {
             display: inline-block;
             margin-bottom: 1.5rem;
-            color: var(--carnival-purple);
+            color: var(--carnival-gold);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
         }
 
         .back-link:hover {
-            color: var(--carnival-red);
+            color: #fff;
+        }
+
+        .terms-label {
+            display: flex;
+            align-items: flex-start;
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .terms-label input {
+            width: auto;
+            margin-right: 0.5rem;
+            margin-top: 0.3rem;
         }
 
         @media (max-width: 768px) {
@@ -233,19 +224,17 @@
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
+<body class="carnival-page register-page">
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo-container">
-                <img src="Dingolay/Afca Logo.jpg" alt="AFCA Movements Logo" class="logo">
+                <a href="index.html"><img src="afca/Afca Logo.jpg" alt="AFCA Movements Logo" class="logo"></a>
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#performances">Performances</a></li>
-                <li><a href="dingolay.html">Dingolay 2026</a></li>
-                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="carnival-2026.html">Carnival 2026</a></li>
+                <li><a href="dingolay.html">Dingolay</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
             <button class="menu-toggle" aria-label="Toggle menu">
@@ -257,126 +246,93 @@
     </nav>
 
     <div class="registration-container">
-        <a href="dingolay.html" class="back-link">← Back to Dingolay 2026</a>
-        
+        <a href="carnival-2026.html" class="back-link">← Back to Carnival 2026</a>
+
         <div class="registration-header">
-            <h1>Register for Dingolay 2026</h1>
-            <p>Join us for this vibrant celebration of Caribbean culture, dance, and heritage</p>
-            <div class="fee-badge">Registration Fee: £10</div>
+            <h1>Register for Carnival 2026</h1>
+            <p>Join AFCA Movements × M2K Mas for Notting Hill Carnival and Saint Lucia masquerade sections.</p>
+            <span class="whatsapp-badge">Registration sent to WhatsApp</span>
         </div>
 
         <form id="registration-form">
-            <!-- Personal Information -->
             <div class="form-section">
                 <h2>Personal Information</h2>
                 <div class="form-grid">
-                    <div class="form-group">
-                        <label for="firstName">First Name <span class="required">*</span></label>
-                        <input type="text" id="firstName" name="firstName" required>
+                    <div class="form-group full-width">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required autocomplete="name" placeholder="First and last name">
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name <span class="required">*</span></label>
-                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="phone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required autocomplete="tel">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <label for="socialMedia">Social Media Handle</label>
+                        <input type="text" id="socialMedia" name="socialMedia" placeholder="e.g. @username (Instagram, TikTok, etc.)" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
-                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                        <label for="gender">Gender <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="ageGroup">Age Group <span class="required">*</span></label>
-                        <select id="ageGroup" name="ageGroup" required>
-                            <option value="">Select Age Group</option>
-                            <option value="child">Child (Under 12)</option>
-                            <option value="teen">Teen (13-17)</option>
-                            <option value="adult">Adult (18-64)</option>
-                            <option value="senior">Senior (65+)</option>
+                        <label for="size">Size</label>
+                        <select id="size" name="size">
+                            <option value="">Select if applicable</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Address Information -->
             <div class="form-section">
-                <h2>Address Information</h2>
+                <h2>Costume Section</h2>
                 <div class="form-grid">
                     <div class="form-group full-width">
-                        <label for="address">Street Address <span class="required">*</span></label>
-                        <input type="text" id="address" name="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City <span class="required">*</span></label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="postcode">Postcode <span class="required">*</span></label>
-                        <input type="text" id="postcode" name="postcode" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="country">Country <span class="required">*</span></label>
-                        <input type="text" id="country" name="country" value="United Kingdom" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Workshop Preferences -->
-            <div class="form-section">
-                <h2>Workshop Preferences</h2>
-                <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label>Which workshops are you interested in? <span class="required">*</span></label>
-                        <div style="margin-top: 0.5rem;">
-                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" name="workshops" value="dance" style="width: auto; margin-right: 0.5rem;">
-                                Dance Workshops
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" name="workshops" value="drumming" style="width: auto; margin-right: 0.5rem;">
-                                Drumming Sessions
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" name="workshops" value="cultural" style="width: auto; margin-right: 0.5rem;">
-                                Cultural Education
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" name="workshops" value="carnival" style="width: auto; margin-right: 0.5rem;">
-                                Carnival Arts
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="experience">Previous Experience Level</label>
-                        <select id="experience" name="experience">
-                            <option value="">Select Experience Level</option>
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
+                        <label for="costumeSection">Which section would you like to join? <span class="required">*</span></label>
+                        <select id="costumeSection" name="costumeSection" required>
+                            <option value="">Select a section</option>
+                            <option value="helen-west">Helen of the West (Dingolay / Saint Lucia Masquerade) — £150</option>
+                            <option value="jab-molasses">Jab Molasses (Lucy Mas 2026)</option>
+                            <option value="black-jab">Team Black Jab — £135</option>
+                            <option value="red-jab">Team Red Jab — £160</option>
+                            <option value="king-jab">King Jab</option>
+                            <option value="jab-jamet">Jab Jamet</option>
+                            <option value="pi-banan">Pi-Banan — £150</option>
+                            <option value="juicy-lucy">Juicy Lucy — £140</option>
+                            <option value="virgie-alexander">Virgie Alexander — £140</option>
+                            <option value="sensei-esteban">Sensei Esteban — £140</option>
+                            <option value="undecided">Not sure yet — please advise</option>
                         </select>
                     </div>
                     <div class="form-group full-width">
-                        <label for="additionalInfo">Additional Information or Special Requirements</label>
-                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Any dietary requirements, accessibility needs, or other information we should know..."></textarea>
+                        <label for="additionalInfo">Questions or special requirements</label>
+                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Sizing, accessibility, payment queries, etc."></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Emergency Contact -->
             <div class="form-section">
                 <h2>Emergency Contact</h2>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="emergencyName">Emergency Contact Name <span class="required">*</span></label>
+                        <label for="emergencyName">Name <span class="required">*</span></label>
                         <input type="text" id="emergencyName" name="emergencyName" required>
                     </div>
                     <div class="form-group">
-                        <label for="emergencyPhone">Emergency Contact Phone <span class="required">*</span></label>
+                        <label for="emergencyPhone">Phone <span class="required">*</span></label>
                         <input type="tel" id="emergencyPhone" name="emergencyPhone" required>
                     </div>
                     <div class="form-group">
@@ -386,40 +342,31 @@
                 </div>
             </div>
 
-            <!-- Terms and Conditions -->
             <div class="form-section">
-                <div class="form-group">
-                    <label style="display: flex; align-items: flex-start; font-weight: normal;">
-                        <input type="checkbox" id="terms" name="terms" required style="width: auto; margin-right: 0.5rem; margin-top: 0.3rem;">
-                        <span>I agree to the <a href="#" style="color: var(--carnival-purple);">Terms and Conditions</a> and <a href="#" style="color: var(--carnival-purple);">Privacy Policy</a> <span class="required">*</span></span>
+                <div class="form-group full-width">
+                    <label class="terms-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span>I confirm the details above are correct and agree to be contacted about my Carnival 2026 registration. <span class="required">*</span></span>
                     </label>
                 </div>
             </div>
 
             <button type="submit" class="submit-button" id="submit-button">
-                Submit Registration
+                Send Registration via WhatsApp
             </button>
 
             <div class="success-message" id="success-message">
-                <h3>Registration Submitted! 🎉</h3>
-                <p>Thank you for registering for Dingolay 2026. Please complete your payment below to finalize your registration.</p>
-                <a href="#" id="payment-link" class="payment-button" target="_blank" style="display: none;">
-                    Pay £10 Registration Fee
-                </a>
+                <h3>WhatsApp opened</h3>
+                <p>Please tap <strong>Send</strong> in WhatsApp to deliver your registration to AFCA Movements. If it did not open, call or message 07507 263547.</p>
             </div>
 
             <div class="error-message" id="error-message">
-                <h3>Registration Failed</h3>
                 <p id="error-text">Please fill in all required fields and try again.</p>
             </div>
         </form>
     </div>
 
     <script src="script.js"></script>
-    <!-- jsPDF for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- EmailJS for sending emails -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="register.js"></script>
 </body>
 </html>
