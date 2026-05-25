@@ -358,6 +358,36 @@ body.carnival-page .logo-container .logo {
     line-height: 1.7;
 }
 
+.carnival-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.carnival-cta-buttons .btn-carnival {
+    display: inline-block;
+    text-align: center;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 520px) {
+    .carnival-cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .carnival-cta-buttons .btn-carnival {
+        width: 100%;
+    }
+}
+
 /* Contact — dark theme */
 body.carnival-page .contact {
     background: #1a1a1a;
